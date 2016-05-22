@@ -206,49 +206,6 @@ html
         a(href='https://github.com/TheAlphaNerd/voxel-meter-js/') View the Project on Github
 
       section
-        pre
-          code.language-javascript.
-            function Audio() {
-              this.context =
-                new (window.AudioContext || window.webkitAudioContext)();
-              this.analyzer = this.context.createAnalyser();
-              this.frequencyData = new Uint8Array(256);
-
-              wireMic(this.context, this.analyzer);
-
-              return this;
-            }
-      
-      section
-        pre
-          code.language-javascript.
-            function wireMic(audioContext, analyzer) {
-              function gotStream(stream) {
-                // Create an AudioNode from the stream.
-                var mediaStreamSource = 
-                  audioContext.createMediaStreamSource(stream);
-
-                // Connect it to the destination to hear
-                // yourself (or any other node for processing!)
-                mediaStreamSource.connect(analyzer);
-              }
-
-              navigator.getUserMedia = /*shim*/
-              navigator.getUserMedia({audio: true},
-                gotStream, function (err) {
-                console.log(err);
-              });
-            }
-
-      section
-        pre
-          code.language-javascript.
-            Audio.prototype.getFFT = function () {
-              this.analyzer.getByteFrequencyData(this.frequencyData);
-              return this.frequencyData;
-            };
-
-      section
         h2 http://harmonic.kni.sh/
         h3 Visit the above link on your phone or lappy
         h4 P.S. it is about to make some sound, so turn it up!
